@@ -66,11 +66,6 @@ class EnsureResources extends _react.default.Component {
     if (!nextState.pageResources) {
       this.loadResources(nextProps.location.pathname);
       return false;
-    }
-
-    if (process.env.GATSBY_EXPERIMENTAL_QUERY_ON_DEMAND && nextState.pageResources.stale) {
-      this.loadResources(nextProps.location.pathname);
-      return false;
     } // Check if the component or json have changed.
 
 

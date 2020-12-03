@@ -138,6 +138,7 @@ const navigate = (to, options = {}) => {
           });
         }
 
+        console.log(`Site has changed on server. Reloading browser`);
         window.location = pathname;
       }
     }
@@ -260,7 +261,7 @@ class RouteUpdates extends _react.default.Component {
   }
 
   shouldComponentUpdate(prevProps) {
-    if (this.props.location.href !== prevProps.location.href) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       onPreRouteUpdate(this.props.location, prevProps.location);
       return true;
     }
@@ -269,7 +270,7 @@ class RouteUpdates extends _react.default.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location.href !== prevProps.location.href) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       onRouteUpdate(this.props.location, prevProps.location);
     }
   }

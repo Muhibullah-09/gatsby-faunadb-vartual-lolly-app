@@ -11,27 +11,16 @@ import Link, {
 } from "gatsby-link"
 import { useScrollRestoration } from "gatsby-react-router-scroll"
 import PageRenderer from "./public-page-renderer"
-import loader, { getStaticQueryResults } from "./loader"
+import loader from "./loader"
 
 const prefetchPathname = loader.enqueue
 
 const StaticQueryContext = React.createContext({})
 
 function StaticQueryDataRenderer({ staticQueryData, data, query, render }) {
-  let combinedStaticQueryData = staticQueryData
-
-  if (process.env.GATSBY_EXPERIMENTAL_LAZY_DEVJS) {
-    // when we remove the flag, we don't need to combine them
-    // w/ changes @pieh made.
-    combinedStaticQueryData = {
-      ...getStaticQueryResults(),
-      ...staticQueryData,
-    }
-  }
-
   const finalData = data
     ? data.data
-    : combinedStaticQueryData[query] && combinedStaticQueryData[query].data
+    : staticQueryData[query] && staticQueryData[query].data
 
   return (
     <React.Fragment>
@@ -82,37 +71,15 @@ useStaticQuery(graphql\`${query}\`);
 `)
   }
 
-  let queryNotFound = false
-  if (process.env.GATSBY_EXPERIMENTAL_LAZY_DEVJS) {
-    // Merge data loaded via socket.io & xhr
-    // when we remove the flag, we don't need to combine them
-    // w/ changes @pieh made.
-    const staticQueryData = {
-      ...getStaticQueryResults(),
-      ...context,
-    }
-    if (staticQueryData[query]?.data) {
-      return staticQueryData[query].data
-    } else {
-      queryNotFound = true
-    }
+  if (context?.[query]?.data) {
+    return context[query].data
   } else {
-    if (context[query]?.data) {
-      return context[query].data
-    } else {
-      queryNotFound = true
-    }
-  }
-
-  if (queryNotFound) {
     throw new Error(
       `The result of this StaticQuery could not be fetched.\n\n` +
         `This is likely a bug in Gatsby and if refreshing the page does not fix it, ` +
         `please open an issue in https://github.com/gatsbyjs/gatsby/issues`
     )
   }
-
-  return null
 }
 
 StaticQuery.propTypes = {
@@ -131,6 +98,11 @@ function graphql() {
   )
 }
 
+function unstable_collectionGraphql() {
+  // TODO: Strip this out of the component and throw error if it gets called
+  return null
+}
+
 export {
   Link,
   withAssetPrefix,
@@ -147,4 +119,6 @@ export {
   PageRenderer,
   useStaticQuery,
   prefetchPathname,
+  // Experimental API
+  unstable_collectionGraphql,
 }

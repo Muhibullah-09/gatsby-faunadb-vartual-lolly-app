@@ -7,6 +7,7 @@ const shortid = require("shortid");
 const typeDefs = gql`
   type Query {
     hello: String
+    getLolly(lollyPath: String!): Lolly
   }
   type Lolly {
     recipientName: String!
@@ -29,12 +30,23 @@ const resolvers = {
       return 'Hello, Lolly!'
     },
   },
-  Mutation : {
+  getLolly: async (_, args) => {
+    const lollyPath = args.lollyPath
+    const client = new faunadb.Client({ secret: "fnAD7zDC_kACB1LO1oyNlYeDG7ONEoUNYtvjS6Uc" });
+    console.log("getting data for", lollyPath)
+    const result = await client.query(
+      q.Get(q.Match(q.Index("lollies_by_id"), lollyPath))
+    )
+    if (result.data) {
+      return result.data
+    }
+    return null
+  },
+  Mutation: {
     createLolly: async (_, args) => {
-// In agrs we receive all properties which is decleared above in Mutation
-        console.log("args = ",args);
-      
-      const client = new faunadb.Client({secret: "fnAD7zDC_kACB1LO1oyNlYeDG7ONEoUNYtvjS6Uc"});
+      // In agrs we receive all properties which is decleared above in Mutation
+      console.log("args = ", args);
+      const client = new faunadb.Client({ secret: "fnAD7zDC_kACB1LO1oyNlYeDG7ONEoUNYtvjS6Uc" });
       const id = shortid.generate();
       args.lollyPath = id
 
@@ -43,7 +55,7 @@ const resolvers = {
           data: args
         })
       );
-        
+
       console.log('result', result);
       console.log('result', result.data);
       return result.data

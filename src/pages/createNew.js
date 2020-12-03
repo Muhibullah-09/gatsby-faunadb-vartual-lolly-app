@@ -2,7 +2,8 @@ import { gql, useMutation } from "@apollo/client";
 import React, { useRef, useState } from "react"
 import Header from "../component/Header"
 import Lolly from "../component/Lolly"
-
+import LollyFormik from "../component/LollyFormik"
+import { navigate } from "gatsby"
 
 const createLollyMutation = gql`
     mutation createLolly($recipientName: String!, $message: String!, $senderName: String!, $flavourTop: String!, $flavourMiddle: String!,$flavourBottom: String!) {
@@ -32,18 +33,31 @@ export default function CreateNew() {
                 senderName: senderRef.current.value,
                 flavourTop: color1,
                 flavourMiddle: color2,
-                flavourBottom: color3
+                flavourBottom: color3,
             }
         });
+        const result = await createLolly({ variables:lollyPath })
+        navigate(`/${result.data.createLolly.lollyPath}`)
         recipientNameRef.current.value = "";
         messageRef.current.value = "";
         senderRef.current.value = "";
     }
+    // const handleSubmit = async ({ to, from, message }) => {
+    //     const formData = {
+    //       to,
+    //       from,
+    //       message,
+    //       topColor,
+    //       midColor,
+    //       botColor,
+    //     }
+    //     const result = await createLolly({ variables: formData })
+    //     navigate(`/${result.data.createLolly.lollyPath}`)
+    //   }
 
     return (
         <div className="container">
             <Header />
-
             <div className="lollyFormDiv">
                 <div>
                     <Lolly fillLollyTop={color1} fillLollyMiddle={color2} fillLollyBottom={color3} />
@@ -54,10 +68,8 @@ export default function CreateNew() {
                             onChange={(e) => {
                                 setColor1(e.target.value)
                             }}
-
                         />
                     </label>
-
                     <label htmlFor="flavourTop" className="colorPickerLabel">
                         <input type="color" value={color2} className="colorPicker" name="flavourTop" id="flavourTop"
                             onChange={(e) => {
@@ -73,8 +85,8 @@ export default function CreateNew() {
                         />
                     </label>
                 </div>
-                <div>
-                    <div className="lollyFrom">
+                {/* <div> */}
+                    {/* <div className="lollyFrom">
                         <label htmlFor="recipientName">
                             To
                     </label>
@@ -89,7 +101,8 @@ export default function CreateNew() {
                         <input type="text" name="senderName" id="senderName" ref={senderRef} />
                     </div>
                     <input type="button" value="Create Vartual Lolly" onClick={submitLollyForm} />
-                </div>
+                </div> */}
+                <LollyFormik onSubmit={submitLollyForm} />
             </div>
         </div>
     );
