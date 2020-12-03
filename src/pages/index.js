@@ -11,20 +11,19 @@ export default function Home() {
       <Header />
       <div className="listLollies">
         <div>
-          <Lolly fillLollyTop="#d52358" fillLollyMiddle="#e95946" fillLollyBottom="#deaa43"  />
-        </div> 
+          <Lolly fillLollyTop="#d52358" fillLollyMiddle="#e95946" fillLollyBottom="#deaa43" />
+        </div>
         <div>
-          <Lolly fillLollyTop="red" fillLollyMiddle="green" fillLollyBottom="blue"  />
-        </div>  
+          <Lolly fillLollyTop="red" fillLollyMiddle="green" fillLollyBottom="blue" />
+        </div>
       </div>
       <input type="button" value="Create New Lolly"
         onClick={
-          ()=>{
+          () => {
             navigate("/createNew");
           }
         }
-      ></input>
+      />
     </div>
-
   );
 }

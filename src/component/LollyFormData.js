@@ -6,13 +6,13 @@ const LollyFromData = ({ lolly, location }) => {
     return (
         <div className="freezer-container">
             <Lolly
-                fillLollyTop={lolly.topColor}
-                fillLollyMiddle={lolly.midColor}
-                fillLollyBottom={lolly.topColor}
+                fillLollyTop={lolly.fillLollyTop}
+                fillLollyMiddle={lolly.fillLollyMiddle}
+                fillLollyBottom={lolly.fillLollyBottom}
             />
             <div>
                 <h1>
-                    {lolly.from} Made this lolly for {lolly.to}
+                    {lolly.recipientName} Made this lolly for {lolly.senderName}
                 </h1>
                 <textarea
                     className="message-from-freezer"
@@ -33,7 +33,7 @@ const LollyFromData = ({ lolly, location }) => {
                     }}
                 >
                     Copy
-        </button>
+                </button>
             </div>
         </div>
     )

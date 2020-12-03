@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { useRef, useState } from "react"
+import React, {  useState } from "react"
 import Header from "../component/Header"
 import Lolly from "../component/Lolly"
 import LollyFormik from "../component/LollyFormik"
@@ -18,29 +18,32 @@ export default function CreateNew() {
     const [color1, setColor1] = useState("#d52358");
     const [color2, setColor2] = useState("#e95946");
     const [color3, setColor3] = useState("#deaa43");
-    const recipientNameRef = useRef();
-    const messageRef = useRef();
-    const senderRef = useRef();
+    // const recipientNameRef = useRef();
+    // const messageRef = useRef();
+    // const senderRef = useRef();
 
     const [createLolly] = useMutation(createLollyMutation);
-
-    const submitLollyForm = async () => {
-        console.log("sender", senderRef.current.value);
-        await createLolly({
-            variables: {
-                recipientName: recipientNameRef.current.value,
-                message: messageRef.current.value,
-                senderName: senderRef.current.value,
-                flavourTop: color1,
-                flavourMiddle: color2,
-                flavourBottom: color3,
-            }
-        });
-        const result = await createLolly({ variables:lollyPath })
+    const submitLollyForm = async ({ recipientName, message, senderName }) => {
+        // console.log("sender", senderRef.current.value);
+        const Data = {
+            // recipientName: recipientNameRef.current.value,
+            // message: messageRef.current.value,
+            // senderName: senderRef.current.value,
+            // flavourTop: color1,
+            // flavourMiddle: color2,
+            // flavourBottom: color3,
+            recipientName,
+            message,
+            senderName,
+            color1,
+            color2,
+            color3
+        }
+        const result = await createLolly({ variables: Data })
         navigate(`/${result.data.createLolly.lollyPath}`)
-        recipientNameRef.current.value = "";
-        messageRef.current.value = "";
-        senderRef.current.value = "";
+        // recipientNameRef.current.value = "";
+        // messageRef.current.value = "";
+        // senderRef.current.value = "";
     }
     // const handleSubmit = async ({ to, from, message }) => {
     //     const formData = {
@@ -60,7 +63,12 @@ export default function CreateNew() {
             <Header />
             <div className="lollyFormDiv">
                 <div>
-                    <Lolly fillLollyTop={color1} fillLollyMiddle={color2} fillLollyBottom={color3} />
+                    <Lolly
+                        fillLollyTop={color1}
+                        fillLollyMiddle={color2}
+                        fillLollyBottom={color3}
+
+                    />
                 </div>
                 <div className="lollyFlavourDiv">
                     <label htmlFor="flavourTop" className="colorPickerLabel">
@@ -86,7 +94,7 @@ export default function CreateNew() {
                     </label>
                 </div>
                 {/* <div> */}
-                    {/* <div className="lollyFrom">
+                {/* <div className="lollyFrom">
                         <label htmlFor="recipientName">
                             To
                     </label>

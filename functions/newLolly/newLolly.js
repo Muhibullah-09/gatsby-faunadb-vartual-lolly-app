@@ -1,9 +1,8 @@
 const { ApolloServer, gql } = require('apollo-server-lambda')
-
 const faunadb = require("faunadb");
 const q = faunadb.query;
 const shortid = require("shortid");
-//we use shortid library for genrating a
+//we use shortid library for genrating a short unique id.
 const typeDefs = gql`
   type Query {
     hello: String
@@ -68,4 +67,6 @@ const server = new ApolloServer({
   resolvers,
 })
 
-exports.handler = server.createHandler()
+const handler = server.createHandler()
+
+module.exports = { handler }

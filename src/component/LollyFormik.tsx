@@ -2,18 +2,23 @@ import React from "react"
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from "yup"
 
+interface LollyFormTypes {
+  recipientName: string
+  senderName: string
+  message: string
+}
 
 const Schema = Yup.object().shape({
-  to: Yup.string().required("Recipient Required"),
-  from: Yup.string().required("Sender Required"),
+  recipientName: Yup.string().required("Recipient Required"),
+  senderName: Yup.string().required("Sender Required"),
   message: Yup.string().required("Message Required"),
 })
 
 const LollyFormik = props => {
-  const initialValues = {
-    from: "",
+  const initialValues: LollyFormTypes = {
+    recipientName: "",
     message: "",
-    to: "",
+    senderName: "",
   }
 
   return (
