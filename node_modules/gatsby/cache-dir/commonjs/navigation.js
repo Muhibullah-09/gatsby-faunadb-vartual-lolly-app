@@ -261,7 +261,7 @@ class RouteUpdates extends _react.default.Component {
   }
 
   shouldComponentUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    if (this.props.location.href !== prevProps.location.href) {
       onPreRouteUpdate(this.props.location, prevProps.location);
       return true;
     }
@@ -270,7 +270,7 @@ class RouteUpdates extends _react.default.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    if (this.props.location.href !== prevProps.location.href) {
       onRouteUpdate(this.props.location, prevProps.location);
     }
   }
