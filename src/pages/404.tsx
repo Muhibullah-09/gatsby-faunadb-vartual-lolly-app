@@ -32,13 +32,13 @@ export default function NotFound({ location }) {
       ) : !!data && queryLollies === "/lollies/" ? (
         <div>
           <Header
-            mainHeadingText="Kuch Meetha Hojaye?"
+            mainHeadingText="Vartual Lolly"
             secondaryHeadingText="You recieved a lolly, dont eat it alone !"
           />
           <h5 className="sharableLinkContainer">Your sharable link: </h5>{" "}
           <span className="sharableLink">
             {" "}
-            {`https://sharelolly.netlify.app/lollies/${data.getLollyByPath.lollyPath}`}
+            {`https://muhibullahlollygift.netlify.app/lollies/${data.getLollyByPath.lollyPath}`}
           </span>
           <div className="recievedContentContainer">
             <Lolly
