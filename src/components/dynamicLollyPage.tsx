@@ -7,13 +7,14 @@ export const query = graphql`
   query MyQuery($lollyPath: String!) {
     LOLLIES {
       getLollyByPath(lollyPath: $lollyPath) {
+        message
+        recipientName
+        sendersName
         flavorBot
         flavorMid
         flavorTop
         lollyPath
-        message
-        recipientName
-        sendersName
+
       }
     }
   }
