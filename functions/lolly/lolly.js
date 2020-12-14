@@ -94,7 +94,7 @@ const resolvers = {
             },
           })
         )
-        axios.post("https://api.netlify.com/build_hooks/5fd6a3e1ae5523a4ea51c34c")
+        axios.post("https://api.netlify.com/build_hooks/5fd7d1620ce1a40fbbe570af")
         return result.data
       } catch (error) {
         console.log("Error: ")
