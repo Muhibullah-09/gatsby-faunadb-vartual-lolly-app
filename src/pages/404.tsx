@@ -6,13 +6,14 @@ import { useQuery, gql } from "@apollo/client"
 const GET_LOLLY_BY_PATH = gql`
   query getLollies($lollyPath: String!) {
     getLollyByPath(lollyPath: $lollyPath) {
+      message
+      recipientName
+      sendersName
       flavorBot
       flavorMid
       flavorTop
       lollyPath
-      message
-      recipientName
-      sendersName
+
     }
   }
 `
