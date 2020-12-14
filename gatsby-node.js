@@ -1,5 +1,4 @@
 const path = require(`path`)
-
 exports.createPages = async ({ actions, graphql }) => {
   const { data } = await graphql(`
   query MyQuery {
