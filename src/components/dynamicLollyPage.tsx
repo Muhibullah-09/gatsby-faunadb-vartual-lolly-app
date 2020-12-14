@@ -24,7 +24,7 @@ export default function DynamicLollyPage({ data }) {
   return (
     <div>
       <Header
-        mainHeadingText="Kuch Meetha Hojaye?"
+        mainHeadingText="Vartual Lolly Shop"
         secondaryHeadingText="You recieved a lolly, dont eat it alone !"
       />
       <h5 className="sharableLinkContainer">Your sharable link: </h5>{" "}

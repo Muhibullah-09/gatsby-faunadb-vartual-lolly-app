@@ -33,7 +33,7 @@ export default function NotFound({ location }) {
       ) : !!data && queryLollies === "/lollies/" ? (
         <div>
           <Header
-            mainHeadingText="Vartual Lolly"
+            mainHeadingText="Vartual Lolly Shop"
             secondaryHeadingText="You recieved a lolly, dont eat it alone !"
           />
           <h5 className="sharableLinkContainer">Your sharable link: </h5>{" "}
