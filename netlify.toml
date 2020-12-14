@@ -1,4 +1,5 @@
 [build]
-  command = "yarn build && cd functions && npm install"
-    publish = "public"
     functions = "functions"
+
+[[plugins]]
+    package = "netlify-plugin-gatsby-cache"    

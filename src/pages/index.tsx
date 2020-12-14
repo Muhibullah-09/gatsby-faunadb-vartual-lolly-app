@@ -1,45 +1,22 @@
 import React from "react"
-import Lolly from "../components/lolly"
-import Header from "../components/header"
-import { navigate } from "gatsby"
+//@ts-ignore
+import img from "./bg.png"
+import Image from 'react-bootstrap/Image'
+import { Button } from "react-bootstrap"
+import { Link } from 'gatsby';
+import Layout from "../components/Layout"
 
 export default function Home() {
-  return (
-    <div>
-      <Header
-        mainHeadingText="Kuch Meetha Hojaye?"
-        secondaryHeadingText="Aoo Khushiyaan Baantain..."
-      />
-      <div className="lolliesContainer">
-        <Lolly style="lollipop" />
-        <Lolly
-          style="lollipop"
-          lollyTop="#6b6bde"
-          lollyBot="#4ac383"
-          lollyMid="#d2ec27"
-        />
-        <Lolly
-          style="lollipop"
-          lollyTop="#b71616"
-          lollyBot="#bf10f1"
-          lollyMid="#10adf1"
-        />
-        <Lolly
-          style="lollipop"
-          lollyTop="#ffc107"
-          lollyBot="#00a97e"
-          lollyMid="#ec398f"
-        />
-      </div>
+  return <div className="home-container">
 
-      <button
-        className="createLollyButton"
-        onClick={() => {
-          navigate("/createNew")
-        }}
-      >
-        Send a customized lolly to a friend
-      </button>
-    </div>
-  )
+      <Layout>
+      <Image className='home-lolly' src={img} fluid />
+    <Button className='home-btn' size="lg">
+    <Link className='btn-link' to='/CreateLolly/'>Make a new lolly to send to a friend</Link>
+  </Button>
+      </Layout>
+    
+
+    
+  </div>
 }

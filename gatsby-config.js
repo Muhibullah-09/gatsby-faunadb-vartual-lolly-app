@@ -1,17 +1,18 @@
-module.exports = {
-  plugins: [
-    {
-      resolve: "gatsby-source-graphql",
-      options: {
-        // This type will contain remote schema Query type
-        typeName: "Lollies",
-        // This is the field under which it's accessible
-        fieldName: "LOLLIES",
-        // URL to query from
-        url: "https://muhibullahlollygift.netlify.app/.netlify/functions/newLolly/",
-      },
-    },
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/gatsby-config/
+ */
 
-    
+module.exports = {
+  /* Your site config here */
+  plugins: [
+    'gatsby-plugin-typescript',
+    {
+      resolve: 'gatsby-plugin-apollo',
+      options: {
+        uri: '/.netlify/functions/lolly'
+      }
+    }
   ],
 }
