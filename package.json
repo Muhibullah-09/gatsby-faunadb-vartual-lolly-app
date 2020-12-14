@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.4",
+    "apollo-server-lambda": "^2.19.0",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
@@ -23,6 +24,7 @@
     "gatsby": "^2.26.1",
     "gatsby-plugin-apollo": "^3.0.2",
     "gatsby-plugin-typescript": "^2.8.0",
+    "graphql": "^15.4.0",
     "nanoid": "^3.1.20",
     "rc-color-picker": "^1.2.6",
     "react": "^16.12.0",
