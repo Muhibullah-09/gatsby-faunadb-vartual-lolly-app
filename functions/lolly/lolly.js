@@ -55,7 +55,7 @@ const resolvers = {
       try{
         const client = new faunadb.Client({ secret: "fnAD8_JCIaACB3LdEdw1u_CIgUx6EEd1oZhdsAK_"})
         const result = await client.query(
-          q.Get(q.Match(q.Index('lolly_by_id'), id))
+          q.Get(q.Match(q.Index('Lolly_id'), id))
         )
         return result.data
       } catch (err) {
