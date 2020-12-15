@@ -7,7 +7,7 @@ import Lolly from '../Lolly/Lolly'
 
 const Section = ({ lollyPath, recipientName, message, senderName, flavourTop, flavourMiddle, flavourBottom }) => {
 
-  const url = "https://virtual-lolly-harg.netlify.app/"
+  const url = "https://muhiblollygift.netlify.app/"
     return (
         <div>
             <Layout>
