@@ -1,10 +1,3 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/gatsby-config/
- */
- require('dotenv').config()
- 
 module.exports = {
   /* Your site config here */
   plugins: [
@@ -13,7 +6,7 @@ module.exports = {
       options: {
         typeName: "Lolly",
         fieldName: "lolly",
-        url: process.env.CONFIG_URL,
+        url: 'https://virtual-lolly-harg.netlify.app/.netlify/functions/lolly',
       },
     },
   ],
