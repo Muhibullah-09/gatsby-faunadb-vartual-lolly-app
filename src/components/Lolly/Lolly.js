@@ -1,12 +1,7 @@
+ 
 import React from "react"
 
-interface LollyI {
-    fillLollyTop?: string,
-    fillLollyMiddle?: string,
-    fillLollyBottom?: string
-}
-
-export default function Lolly({fillLollyTop, fillLollyMiddle, fillLollyBottom}:LollyI) {
+export default function Lolly({fillLollyTop, fillLollyMiddle, fillLollyBottom}) {
   return (
     <svg className="lollipop" width="163px" height="431px" viewBox="0 0 163 431" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <defs>

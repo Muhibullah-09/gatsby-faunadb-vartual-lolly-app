@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
-    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
@@ -14,24 +14,19 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.4",
-    "apollo-server-lambda": "^2.19.0",
+    "@apollo/client": "^3.2.5",
+    "apollo-server-lambda": "^2.18.2",
     "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
-    "faunadb": "^4.0.0",
-    "formik": "^2.2.5",
-    "gatsby": "^2.26.1",
-    "gatsby-plugin-apollo": "^3.0.2",
-    "gatsby-plugin-typescript": "^2.8.0",
-    "graphql": "^15.4.0",
-    "nanoid": "^3.1.20",
-    "rc-color-picker": "^1.2.6",
+    "faunadb": "^3.0.1",
+    "gatsby": "^2.24.85",
+    "gatsby-source-graphql": "^2.7.6",
+    "gatsby-transformer-remark": "^2.8.47",
+    "graphql": "^14.1.1",
     "react": "^16.12.0",
-    "react-bootstrap": "^1.4.0",
     "react-dom": "^16.12.0",
-    "typescript": "^4.1.2",
-    "yup": "^0.32.5"
+    "react-loader-spinner": "^3.1.14",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "prettier": "2.1.2"

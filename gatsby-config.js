@@ -3,16 +3,18 @@
  *
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
-
+ require('dotenv').config()
+ 
 module.exports = {
   /* Your site config here */
   plugins: [
-    'gatsby-plugin-typescript',
     {
-      resolve: 'gatsby-plugin-apollo',
+      resolve: "gatsby-source-graphql",
       options: {
-        uri: '/.netlify/functions/lolly'
-      }
-    }
+        typeName: "Lolly",
+        fieldName: "lolly",
+        url: process.env.CONFIG_URL,
+      },
+    },
   ],
 }
