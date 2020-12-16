@@ -4,8 +4,8 @@ module.exports = {
     {
       resolve: "gatsby-source-graphql",
       options: {
-        typeName: "lolly",
-        fieldName: "lolly",
+        typeName: "muhib",
+        fieldName: "muhib",
         url: 'https://muhiblollygift.netlify.app/.netlify/functions/vartual_lolly',
       },
     },
