@@ -2,9 +2,9 @@ module.exports = {
   /* Your site config here */
   plugins: [
     {
-      resolve: `gatsby-source-graphql`,
+      resolve: "gatsby-source-graphql",
       options: {
-        typeName: "Lolly",
+        typeName: "lolly",
         fieldName: "lolly",
         url: 'https://muhiblollygift.netlify.app/.netlify/functions/vartual_lolly',
       },
