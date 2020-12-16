@@ -1,9 +1,6 @@
-import React from 'react'
-import { Layout } from '../Layout/Layout'
-import Lolly from '../Lolly/Lolly'
-// import env from 'dotenv'
-// env.config()
-
+import React from 'react';
+import { Layout } from './Layout';
+import Lolly from './Lolly';
 
 const Section = ({ lollyPath, recipientName, message, senderName, flavourTop, flavourMiddle, flavourBottom }) => {
 

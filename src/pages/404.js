@@ -1,8 +1,7 @@
-import React from 'react'
-import { gql, useQuery } from '@apollo/client'
-import Loader from 'react-loader-spinner'
-import Component404 from '../components/Component404/Component404'
-import Section from '../components/Section/Section'
+import React from 'react';
+import { gql, useQuery } from '@apollo/client';
+import Component404 from '../components/404';
+import Section from '../components/Section';
 
 const getLollyById  = gql`
 query getLolly($id: String!) {
@@ -27,7 +26,7 @@ const Page404 =  ({ location }) => {
     })
 
     if(loading) {
-        return <Loader type='Puff' color="#cbd5e0" />
+        return <div><h1>Loading...</h1></div>
     }
 
     if(error) {
@@ -41,4 +40,4 @@ const Page404 =  ({ location }) => {
     )
 }
 
-export default Page404
+export default Page404;

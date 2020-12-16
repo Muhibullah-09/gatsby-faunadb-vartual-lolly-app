@@ -1,12 +1,12 @@
-import React from "react"
-import { navigate } from 'gatsby'
-import { Layout } from "../components/Layout/Layout"
-import Lolly from "../components/Lolly/Lolly"
+import React from "react";
+import { navigate } from 'gatsby';
+import { Layout } from "../components/Layout";
+import Lolly from "../components/Lolly";
 
 export default function Home() {
   return(
     <div>
-      <Layout >
+      <Layout>
         <div>
           <div className='allLollies'>
             <Lolly fillLollyTop='#e97393' fillLollyMiddle='#d23a62' fillLollyBottom='#bb1161' />
@@ -16,7 +16,7 @@ export default function Home() {
             <Lolly fillLollyTop='#ed265b' fillLollyMiddle='#f77249' fillLollyBottom='#f5c64d' />
           </div>
           <div className='button-div' >
-            <button className='btn' onClick={() => navigate('/create')}>
+            <button className='btn' onClick={() => navigate('/createNew')}>
               Create a new lolly to send a friend
             </button>
           </div>
@@ -24,4 +24,4 @@ export default function Home() {
       </Layout>
     </div>
   )
-}
+};

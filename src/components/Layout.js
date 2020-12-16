@@ -1,5 +1,5 @@
-import React from 'react'
-import { Header } from '../Header/Header'
+import React from 'react';
+import { Header } from './Header';
 
 export const Layout = ({ children }) => {
     return (
@@ -8,4 +8,4 @@ export const Layout = ({ children }) => {
             {children}
         </div>
     )
-}
+};

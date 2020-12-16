@@ -1,5 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server-lambda')
-const { default: Axios } = require('axios')
+const axios = require('axios')
 const faunadb = require('faunadb'),
   q = faunadb.query
 const shortid = require('shortid')
@@ -19,7 +19,7 @@ const typeDefs = gql`
     flavourMiddle: String!
     flavourBottom: String!
     lollyPath: String!
-  }
+  } 
 
   type Mutation {
     createLolly(recipientName: String!, message: String!, senderName: String!, flavourTop: String!, flavourMiddle: String!,flavourBottom: String!): Lolly
@@ -30,9 +30,9 @@ const resolvers = {
   Query: {
     getLollies: async () => {
       try { 
-        const client = new faunadb.Client({ secret: "fnAD8_JCIaACB3LdEdw1u_CIgUx6EEd1oZhdsAK_"})
+        const client = new faunadb.Client({ secret: "fnAD9JqDdCACBe2NvLnqF3IL2RbNg93rLWjIRQAO"})
         const result = await client.query(
-          q.Map(q.Paginate(q.Match(q.Index('Lolly_id'))),
+          q.Map(q.Paginate(q.Match(q.Index('lollies-list'))),
           q.Lambda(x => q.Get(x)))
         )
         return result.data.map(d => {
@@ -53,9 +53,9 @@ const resolvers = {
     getLolly: async (_,{ id }) => {
       console.log(id)
       try{
-        const client = new faunadb.Client({ secret: "fnAD8_JCIaACB3LdEdw1u_CIgUx6EEd1oZhdsAK_"})
+        const client = new faunadb.Client({ secret: "fnAD9JqDdCACBe2NvLnqF3IL2RbNg93rLWjIRQAO"})
         const result = await client.query(
-          q.Get(q.Match(q.Index('Lolly_id'), id))
+          q.Get(q.Match(q.Index('lollies-id'), id))
         )
         return result.data
       } catch (err) {
@@ -66,17 +66,15 @@ const resolvers = {
   Mutation: {
     createLolly: async (_, args) => {
       try {
-        const client = new faunadb.Client({ secret:"fnAD8_JCIaACB3LdEdw1u_CIgUx6EEd1oZhdsAK_"})
+        const client = new faunadb.Client({ secret:"fnAD9JqDdCACBe2NvLnqF3IL2RbNg93rLWjIRQAO"})
         const id = shortid.generate()
         args.lollyPath = id
         const result = await client.query(
-          q.Create(q.Collection('lolly_url'), {
+          q.Create(q.Collection('lollies'), {
             data: args
           })
         )
-
-        Axios 
-        .post("https://api.netlify.com/build_hooks/5fd7d1620ce1a40fbbe570af")
+        axios.post("https://api.netlify.com/build_hooks/5fd7d1620ce1a40fbbe570af")
         .then(res => console.log(res))
         .catch(err => console.log(err))
         return result.data
@@ -86,7 +84,6 @@ const resolvers = {
     } 
   }
 }
-
 const server = new ApolloServer({
   typeDefs,
   resolvers,

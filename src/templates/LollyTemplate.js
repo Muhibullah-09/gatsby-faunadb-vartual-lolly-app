@@ -1,24 +1,24 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import Section from '../components/Section/Section'
+import React from 'react';
+import { graphql } from 'gatsby';
+import Section from '../components/Section';
 
 export const query = graphql`
-query getLolly($id: String!) {
-  lolly {
-    getLolly(id: $id) {
-      lollyPath
+  query getLolly($id: String!) {
+    lolly {
+      getLolly(id: $id) {
       recipientName
       message
       senderName
       flavourTop
       flavourMiddle
       flavourBottom
+      lollyPath
     }
   }
 }
 `
 
-const NewLolly = ({ data: { lolly: { getLolly } } }) => {
+const LollyTemplate = ({ data: { lolly: { getLolly } } }) => {
   const { lollyPath, recipientName, message, senderName, flavourTop, flavourMiddle, flavourBottom }  = getLolly
     return (
         <div>
@@ -27,4 +27,4 @@ const NewLolly = ({ data: { lolly: { getLolly } } }) => {
     )
 }
 
-export default NewLolly
+export default LollyTemplate

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from '../Header/Header'
+import { Header } from './Header'
 
 const Component404 = () => {
     return (
@@ -12,4 +12,4 @@ const Component404 = () => {
     )
 }
 
-export default Component404
+export default Component404;

@@ -6,7 +6,7 @@ module.exports = {
       options: {
         typeName: "Lolly",
         fieldName: "lolly",
-        url: 'https://muhiblollygift.netlify.app/.netlify/functions/lolly',
+        url: 'https://muhiblollygift.netlify.app/.netlify/functions/vartual_lolly',
       },
     },
   ],

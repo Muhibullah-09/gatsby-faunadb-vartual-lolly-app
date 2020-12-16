@@ -1,4 +1,5 @@
-const path = require("path")
+const path = require("path");
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const response = await graphql(`
@@ -13,10 +14,10 @@ exports.createPages = async ({ graphql, actions }) => {
   response.data.lolly.getLollies.forEach(edge => {
     createPage({
       path: `/create/${edge.lollyPath}`,
-      component: path.resolve(`./src/templates/newLolly.js`),
+      component: path.resolve(`./src/templates/LollyTemplate.js`),
       context: {
         id: edge.lollyPath,
       },
     })
   })
-}
+};
