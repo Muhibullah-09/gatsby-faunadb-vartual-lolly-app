@@ -1,7 +1,7 @@
 import { navigate } from "gatsby";
 import React from "react";
 
-export const Header = () => {
+const Header = () => {
   return (
     <div  className="container">
       <button style={{backgroundColor: '#21212b', border: 'transparent'}} onClick={() => navigate('/')}>
@@ -11,3 +11,4 @@ export const Header = () => {
     </div>
   )
 };
+export default Header;

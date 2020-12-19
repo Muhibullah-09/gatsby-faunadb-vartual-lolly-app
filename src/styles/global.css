@@ -1,341 +1,228 @@
-@import url("https://fonts.googleapis.com/css?family=Yellowtail&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-::-moz-selection {
-  background-color: #fa73d9;
-  color: #21212b;
-}
-::selection {
-  background-color: #fa73d9;
-  color: #21212b;
-}
-
 body {
   text-align: center;
-  background-color: #21212b;
-  color: mix(#eee, #21212b, 90%);
-  font-family: "open-sans", Helvetica, sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 1.8;
-  min-height: 100vh;
-  background: #21212b;
-
-  @media (min-width: 400px) {
-    font-size: 18px;
-  }
+  background-color: #272727;
 }
 
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-
-  @media (min-width: 740px) {
-    width: 700px;
-  }
-  @media (min-width: 1200px) {
-    width: 800px;
-  }
+.headerContainer {
+  margin: 2rem auto;
 }
 
-h1,
-h2,
-h3 {
-  color: #eee;
-  font-weight: 600;
-  margin-top: 3em;
-  margin-bottom: 0.2em;
-  line-height: 1;
-}
-h1 {
-  font-family: "Yellowtail", cursive;
+.headerContainer h1 {
   font-size: 4em;
-  margin-top: 1em;
-  margin-bottom: 0.2em;
-  line-height: 1;
-
-  @media (min-width: 740px) {
-    font-size: 4.5em;
-  }
-  @media (min-width: 1200px) {
-    font-size: 5em;
-  }
+  color: white;
+  text-shadow: 10px 10px 10px pink;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h1.title a {
-  font-weight: 300;
-  color: #fff;
-  border-bottom-style: none;
-  text-shadow: #fa73d9 0 0 8px;
-
-  /* &:hover,
-  &:focus {
-    text-shadow: #fa73d9 0 0 16px;
-  } */
+.headerContainer h3 {
+  font-size: 2em;
+  color: whitesmoke;
+  text-shadow: 5px 5px 5px thistle;
+  margin-bottom: 5rem;
 }
 
-.lollipop {
-  height: 350px;
-}
-
-.subtitle {
-  font-size: 1em;
-  font-style: italic;
-  color: #ddd;
-  text-shadow: #fa73d9 1px 1px 4px;
-  margin-top: 1.5em;
-  margin-bottom: 3em;
-  line-height: 1.2;
-}
-
-p {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-ul,
-ol {
-  padding-left: 1em;
-}
-
-a:link,
-a:visited {
-  color: #eee;
-  text-decoration: none;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: mix(#eee, #fa73d9, 20%);
-}
-a:hover,
-a:focus {
-  color: #eee;
-  border-bottom-color: #eee;
-}
-
-header {
-  text-align: center;
-}
-
-main {
-  margin-top: 4em;
-}
-
-footer {
-  margin-top: 10em;
-  margin-bottom: 5em;
-  font-size: 0.7em;
-  color: mix(#eee, #fa73d9, 50%);
-
-  /* a:link,
-  a:visited {
-    color: mix(#eee, #fa73d9, 90%);
-    border-bottom: solid 1px mix(#fa73d9, #21212b, 70%);
-  } */
-  /* a:hover,
-  a:focus {
-    color: #eee;
-    border-bottom: solid 1px #eee;
-  } */
-}
-
-.lolly {
-  text-align: center;
-  filter: drop-shadow(0px 0px 10px #000);
-
-  @media (min-width: 740px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.giftLolly .lollipop {
-  margin-bottom: -4em;
-  @media (min-width: 740px) {
-    margin-bottom: 0em;
-  }
-}
-
-.info {
-  @media (min-width: 740px) {
-    margin-left: 4em;
-  }
-}
-
-.details {
-  padding: 1em 2em;
-  margin-bottom: 1.5em;
-  background-color: rgba(0, 0, 0, 0.2);
-  box-shadow: rgba(0, 0, 0, 0.6) 0 0 10px;
-  text-align: left;
-  font-style: italic;
-  font-size: 1.1em;
-}
-
-.message {
-    color: wheat
-}
-
-.recipient,
-.from {
-  font-family: "Yellowtail", cursive;
-  font-size: 1.6em;
-  font-style: normal;
-  text-shadow: #000 0 0 10px;
-  color: #fa73d9;
-}
-.from {
-  padding-left: 2em;
-}
-
-.bytheway {
-  font-size: 0.7em;
-  color: rgba(255, 255, 255, 0.6);
-  @media (min-width: 740px) {
-    font-size: 0.8em;
-  }
-}
-
-.flavours {
-  margin-bottom: 1em;
-  margin-top: 3em;
+.lolliesContainer {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+}
+.lollipop {
+  width: 10vmax;
+  height: 20vmax;
+}
+.createLollyButton {
+  font-size: 1.5em;
+  background-color: #272727;
+  border-style: solid;
+  border-radius: 20em;
+  border-color: violet;
+  padding: 1rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+.createLollyButton:hover {
+  background-color: rgba(240, 47, 159, 0.4);
+}
+
+.createLollyButton:focus {
+  border: none;
+  outline: none;
+}
+
+.LollyCreaterColorContainer {
+  display: flex;
+
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-
-  @media (min-width: 740px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0;
-    margin-bottom: 3em;
-  }
+  align-content: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.editorRoot {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.colorSelectorContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  justify-content: space-around;
+  height: 75%;
+  margin-top: 1rem;
 }
 
-form {
-  padding-bottom: 3em;
-}
-
-.pickerLabel {
-  height: 40px;
-  width: 40px;
-  border-radius: 24px;
-  border: solid 2px #fff;
-  display: block;
-  overflow: hidden;
-  margin: 30px;
-  box-shadow: #000 0 0 14px;
-}
-.colourpicker {
-  height: 60px;
+.colorPickerLabel {
   width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 20px;
+  overflow: hidden;
+}
+.colorPicker {
+  width: 80px;
+  height: 80px;
   margin-top: -10px;
   margin-left: -10px;
-  cursor: pointer;
 }
 
-label {
-  font-family: sans-serif;
-  font-size: 0.8em;
-  display: block;
-  color: #bbb;
-  margin-bottom: 0.2em;
-  font-style: normal;
+.lollipopEditor {
+  height: 100%;
+  margin-right: 1rem;
+  margin-left: 1rem;
 }
 
-input[type="text"],
-textarea {
-  font-size: 0.9em;
-  width: 100%;
-  padding: 0.4em 0.2em;
-  margin: 0 -0.2em;
-  border: solid 1px #fa73d9;
-  color: #fff;
-  background-color: #222;
-  box-shadow: #fa73d9 0 0 6px;
-}
-
-.btn,
-input[type="submit"] {
-  margin-top: 1em;
-  box-shadow: #fa73d9 0 0 6px;
-  border: solid 2px #fa73d9;
-  background-color: transparent;
-  font-size: 0.9em;
-  color: #fa73d9;
-  padding: 1em 2em;
-  border-radius: 4em;
-  cursor: pointer;
-  transition: all 0.3s;
-/* 
-  &:hover {
-    background-color: #fa73d9;
-    color: #222;
-  } */
-}
-
-pre {
-  color: #fa73d9;
-  margin-top: 0.5em;
-  padding: 0.5em 1em;
-  border: solid 1px #000;
-  background-color: #000;
-}
-
-.thumbs {
+.formContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 1rem;
+  flex-grow: 0.2;
+  border-style: solid;
+  border-color: violet;
+  border-width: 0.8rem;
+}
+
+.formLabel {
+  font-size: 1.4rem;
+  color: white;
+  text-align: left;
+  text-shadow: 3px 4px 4px pink;
+  margin-bottom: 1rem;
+}
+
+.inputText {
+  height: 2rem;
+  margin-bottom: 1rem;
+  border-style: solid;
+  border-color: pink;
+  border-width: 2;
+}
+
+.inputTextBox {
+  margin-bottom: 1rem;
+  border-style: solid;
+  border-color: pink;
+  border-width: 2;
+}
+
+.submitButton {
+  width: 10rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  border-radius: 4rem;
+  border-color: pink;
+}
+.submitButton:hover {
+  background-color: rgba(240, 47, 159, 0.4);
+}
+
+.formErrors {
+  color: red;
+  text-align: left;
+  margin-bottom: 0.4rem;
+}
+
+.lollyRecieved {
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.recievedContentContainer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 3em;
-
-  /* .lollipop {
-    height: 180px;
-    @media (min-width: 740px) {
-      height: 300px;
-    }
-  } */
-
-  /* .example {
-    margin: 0 -45px;
-    @media (min-width: 740px) {
-      margin: 0 -10px;
-    }
-  } */
+  padding: 1rem;
 }
 
-.gone {
-  margin-top: 4em;
-  margin-bottom: 4em;
+.recievedTextContainer {
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-between;
+  flex-grow: 0.4;
+  background-color: rgba(179, 179, 179, 0.1);
+  border-radius: 10rem;
+  box-shadow: 0px 5px 10px pink;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
-@keyframes octocat-wave {
-  0%,
-  100% {
-    transform: rotate(0);
-  }
-  20%,
-  60% {
-    transform: rotate(-25deg);
-  }
-  40%,
-  80% {
-    transform: rotate(10deg);
-  }
+.recievedTextContainer h3 {
+  font-size: 2rem;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-shadow: 5px 10px 5px purple;
 }
-@media (max-width: 500px) {
-  .github-corner:hover .octo-arm {
-    animation: none;
-  }
-  .github-corner .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
+
+.recievedTextContainer p {
+  font-size: 1.3rem;
+  color: white;
+}
+
+.recievedTextContainer h4 {
+  font-size: 1.7rem;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-shadow: 5px 10px 5px purple;
+}
+.sharableLink {
+  background-color: white;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  color: black;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+.sharableLinkContainer {
+  font-size: 1.1rem;
+  color: white;
+  background-color: grey;
+  display: inline-block;
+  padding: 0.5rem;
+  margin-top: -2rem;
+}
+.pageNotFound {
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem auto;
+  color: white;
+}
+.loading {
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem auto;
+  color: white;
 }

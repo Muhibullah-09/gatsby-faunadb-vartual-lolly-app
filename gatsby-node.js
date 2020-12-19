@@ -1,22 +1,22 @@
-// const path = require("path");
-// exports.createPages = async ({ graphql, actions }) => {
-//   const { createPage } = actions
-//   const response = await graphql(`
-//     query {
-//       lolly {
-//         getLollies {
-//           lollyPath
-//         }
-//       }
-//     }
-//   `)
-//   response.data.lolly.getLollies.forEach(edge => {
-//     createPage({
-//       path: `/create/${edge.lollyPath}`,
-//       component: path.resolve(`./src/templates/LollyTemplate.js`),
-//       context: {
-//         id: edge.lollyPath,
-//       },
-//     })
-//   })
-// }
+const path = require(`path`);
+
+exports.createPages = async ({ actions, graphql }) => {
+    const { data } = await graphql(`
+    query MyQuery {
+      LOLLIES {
+        getLollies {
+          lollyPath
+      }
+    }
+}`)
+
+console.log(data);
+data.LOLLIES.getLollies.forEach(({ lollyPath }) => {
+    actions.createPage({
+        path: `lollies/${lollyPath}`,
+        component: path.resolve(`./src/templates/LollyTemplate.js`),
+        context: {
+            lollyPath: lollyPath,
+        },
+    })
+})};

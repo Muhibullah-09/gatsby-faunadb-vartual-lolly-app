@@ -1,44 +1,48 @@
-const { ApolloServer, gql } = require('apollo-server-lambda')
-const axios = require('axios')
-const faunadb = require('faunadb'),
-  q = faunadb.query
-const shortid = require('shortid')
-require('dotenv').config() 
+require('dotenv').config();
+const { ApolloServer, gql } = require('apollo-server-lambda');
+const axios = require('axios');
+const faunadb = require('faunadb');
+const q = faunadb.query;
+const shortid = require('shortid');
 
 const typeDefs = gql`
   type Query {
       getLollies: [Lolly!]
-      getLolly(id: String!): Lolly!
+      getLollyByPath(lollyPath: String!): Lolly
   }
-
   type Lolly {
-    recipientName: String!
+    to: String!
     message: String!
-    senderName: String!
+    from: String!
     flavourTop: String!
     flavourMiddle: String!
     flavourBottom: String!
     lollyPath: String!
   } 
-
   type Mutation {
-    createLolly(recipientName: String!, message: String!, senderName: String!, flavourTop: String!, flavourMiddle: String!,flavourBottom: String!): Lolly
+    createLolly(
+      to: String!
+      message: String!
+      from: String!
+      flavourTop: String!
+      flavourMiddle: String!
+      flavourBottom: String!): Lolly
   }
 `
 
 const resolvers = {
   Query: {
     getLollies: async () => {
-      try { 
-        const client = new faunadb.Client({ secret: "fnAD9JqDdCACBe2NvLnqF3IL2RbNg93rLWjIRQAO"})
+      try {
+        const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
         const result = await client.query(
           q.Map(q.Paginate(q.Match(q.Index('lollies-list'))),
-          q.Lambda(x => q.Get(x)))
+            q.Lambda(x => q.Get(x)))
         )
         return result.data.map(d => {
-          return{ 
-            recipientName: d.data.recipientName,
-            senderName: d.data.senderName,
+          return {
+            to: d.data.to,
+            from: d.data.from,
             message: d.data.message,
             lollyPath: d.data.lollyPath,
             flavourTop: d.data.flavourTop,
@@ -46,16 +50,15 @@ const resolvers = {
             flavourBottom: d.data.flavourBottom
           }
         })
-      } catch (err){
+      } catch (err) {
         console.log(err)
       }
     },
-    getLolly: async (_,{ id }) => {
-      console.log(id)
-      try{
-        const client = new faunadb.Client({ secret: "fnAD9JqDdCACBe2NvLnqF3IL2RbNg93rLWjIRQAO"})
+    getLollyByPath: async (_, args) => {
+      try {
+        const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
         const result = await client.query(
-          q.Get(q.Match(q.Index('lollies-id'), id))
+          q.Get(q.Match(q.Index('lollies-list'), args.lollyPath))
         )
         return result.data
       } catch (err) {
@@ -66,22 +69,22 @@ const resolvers = {
   Mutation: {
     createLolly: async (_, args) => {
       try {
-        const client = new faunadb.Client({ secret:"fnAD9JqDdCACBe2NvLnqF3IL2RbNg93rLWjIRQAO"})
-        const id = shortid.generate()
-        args.lollyPath = id
+        const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET })
+        // const id = shortid.generate()
+        // args.lollyPath = id
         const result = await client.query(
           q.Create(q.Collection('lollies'), {
             data: args
           })
         )
-        axios.post("https://api.netlify.com/build_hooks/5fd7d1620ce1a40fbbe570af")
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        axios.post(process.env.BUILD_HOOK_NETLIFY)
+          .then(res => console.log(res))
+          .catch(err => console.log(err))
         return result.data
-      } catch (err){
+      } catch (err) {
         console.log(err)
       }
-    } 
+    }
   }
 }
 const server = new ApolloServer({
@@ -89,4 +92,4 @@ const server = new ApolloServer({
   resolvers,
 })
 
-exports.handler = server.createHandler()
+exports.handler = server.createHandler();

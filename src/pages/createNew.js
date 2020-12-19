@@ -1,90 +1,167 @@
-import React, { useRef, useState } from 'react'
-import { gql, useMutation } from "@apollo/client";
-import { Layout } from '../components/Layout';
+import React, { useState, useRef } from "react";
+import Header from "../components/header";
+import { navigate } from "gatsby";
+import { useQuery, useMutation, gql } from "@apollo/client";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import shortid from "shortid";
 import Lolly from '../components/Lolly';
-import Section from '../components/Section';
 
 const createLollyMutation = gql`
-    mutation createLolly($recipientName: String!, $message: String!, $senderName: String!, $flavourTop: String!, $flavourMiddle: String!,$flavourBottom: String!) {
-        createLolly(recipientName: $recipientName, message: $message, senderName: $senderName, flavourTop: $flavourTop, flavourMiddle: $flavourMiddle, flavourBottom: $flavourBottom) {
-            lollyPath
-            recipientName
-            message
-            senderName
-            flavourTop
-            flavourMiddle
-            flavourBottom
+    mutation createLolly(
+      $to: String! 
+      $message: String!
+      $from: String!
+      $flavourTop: String!
+      $flavourMiddle: String!
+      $flavourBottom: String!
+    ) {
+      createLolly(
+        to: $to
+        message: $message 
+        from: $from
+        flavourTop: $flavourTop
+        flavourMiddle: $flavourMiddle
+        flavourBottom: $flavourBottom
+      ) {
+          lollyPath
+          message
         }
     }
 `
 
-export default function Create() {
-    const [createLolly] = useMutation(createLollyMutation);
-    const [path, setPath] = useState('');
-    const [topColor, setTopColor] = useState('#e97393');
-    const [middleColor, setMiddleColor] = useState('#d23a62');
-    const [bottomColor, seBottomColor] = useState('#bb1161');
-    const recipientName = useRef();
-    const message = useRef();
-    const senderName = useRef();
-
-    const submitLollyForm = async () => {
-        const result = await createLolly({
-            variables: {
-                recipientName: recipientName.current.value,
-                message: message.current.value,
-                senderName: senderName.current.value,
-                flavourTop: topColor,
-                flavourMiddle: middleColor,
-                flavourBottom: bottomColor
-            }
-        })
-        const { lollyPath } = result.data.createLolly
-        setPath(lollyPath)
-    }
-
+export default function CreateNew() {
+    const initialValues ={ 
+        to: "",
+        from: "",
+        message: ""
+    };
+    const validationSchema = Yup.object({
+        to: Yup.string().required("Required").max(15, "Must be 15 characters or less"),
+        from: Yup.string().required("Required").max(15, "Must be 15 characters or less"),
+        message: Yup.string().required("Required"),
+    });
+    const onSubmit =  (values) => {
+        const id = shortid.generate();
+        const submitLollyForm = async () => {
+            const result = await createLolly({
+                variables: {
+                    to: values.to,
+                    from: values.from,
+                    message: values.message,
+                    flavorTop: colorTop,
+                    flavorMiddle: colorMid,
+                    flavorBottom: colorBot,
+                    lollyPath: id,
+                },
+            })
+        }
+        submitLollyForm();
+        navigate(`/lollies/${id}`);
+    };
+    const [colorTop, setcolorTop] = useState("#d52368")
+    const [colorBot, setcolorBot] = useState("#deaa10")
+    const [colorMid, setcolorMid] = useState("#e95946")
+    const formik = useFormik({
+        initialValues={initialValues},
+        validationSchema={validationSchema},
+        onSubmit={onSubmit}
+    });
+    const [createLolly] = useMutation(createLollyMutation)
     return (
         <div>
-            { path ? (
-                <Section lollyPath={path} recipientName={recipientName.current.value} message={message.current.value} senderName={senderName.current.value} flavourTop={topColor} flavourMiddle={middleColor} flavourBottom={bottomColor} />
-            ) : (
-                    <Layout>
-                        <div className='lolly'>
-                            <div className='giftLolly'>
-                                <Lolly fillLollyTop={topColor} fillLollyMiddle={middleColor} fillLollyBottom={bottomColor} />
-                            </div>
-                            <div className='falvours'>
-                                <label id='flavourTop' className='pickerLabel'>
-                                    <input type='color' className="colourpicker" id="flavourTop" name="flavourTop" value={topColor} onChange={(e) => setTopColor(e.target.value)} />
-                                </label>
-                                <label id='flavourTop' className='pickerLabel'>
-                                    <input type='color' className="colourpicker" id="falvourMidlle" name="falvourMidlle" value={middleColor} onChange={(e) => setMiddleColor(e.target.value)} />
-                                </label>                        <label id='flavourTop' className='pickerLabel'>
-                                    <input type='color' className="colourpicker" id="flavourBottom" name="flavourBottom" value={bottomColor} onChange={(e) => seBottomColor(e.target.value)} />
-                                </label>
-                            </div>
-                            <div className='info'>
-                                <div className='details'>
-                                    <p>
-                                        <label htmlFor='recipientName' >To</label>
-                                        <input type="text" required id="recipientName" name="recipientName" placeholder="From" ref={recipientName} />
-                                    </p>
-                                    <div className='message'>
-                                        <label htmlFor='recipientName'>
-                                            Say Something Nice
-                                        </label>
-                                        <textarea name="message" required id="message" cols="30" rows="10" ref={message} />
-                                    </div>
-                                    <p>
-                                        <label htmlFor='recipientName'>From</label>
-                                        <input type="text" required placeholder="from your friend..." ref={senderName} />
-                                    </p>
-                                </div>
-                                <input type="submit" onClick={submitLollyForm} />
-                            </div>
-                        </div>
-                    </Layout>
-                )}
+            <Header/>
+            <div className="editorRoot">
+                <div className="LollyCreaterColorContainer">
+                    <Lolly
+                        style="lollipopEditor"
+                        lollyTop={colorTop}
+                        lollyBot={colorBot}
+                        lollyMid={colorMid}
+                    />
+                    <div className="colorSelectorContainer">
+                        <label htmlFor="topFlavor" className="colorPickerLabel">
+                            <input
+                                className="colorPicker"
+                                value={colorTop}
+                                type="color"
+                                name="topFlavor"
+                                id="topFlavor"
+                                onChange={e => {setcolorTop(e.target.value)}}
+                            />
+                        </label>
+                        <label htmlFor="midFlavor" className="colorPickerLabel">
+                            <input
+                                className="colorPicker"
+                                value={colorMid}
+                                type="color"
+                                name="midFlavor"
+                                id="midFlavor"
+                                onChange={e => {setcolorMid(e.target.value)}}
+                            />
+                        </label>
+                        <label htmlFor="botFlavor" className="colorPickerLabel">
+                            <input
+                                className="colorPicker"
+                                value={colorBot}
+                                type="color"
+                                name="botFlavor"
+                                id="botFlavor"
+                                onChange={e => {setcolorBot(e.target.value)}}
+                            />
+                        </label>
+                    </div>
+                </div>
+                <form className="formContainer" onSubmit={formik.handleSubmit}>
+                    <label className="formLabel" htmlFor="sendName">
+                        To:
+                    </label>
+                    <div className="formErrors">
+                        {formik.errors.to && formik.touched.to ? formik.errors.to : null}
+                    </div>
+                    <input
+                        className="inputText"
+                        type="text"
+                        name="recName"
+                        id="recName"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    <label className="formLabel" htmlFor="msg">
+                        Message:{" "}
+                    </label>
+                    <div className="formErrors">
+                        {formik.errors.message && formik.touched.message ? formik.errors.message : null}
+                    </div>
+                    <textarea
+                        id="message"
+                        name="message"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        className="inputTextBox"
+                        cols={30}
+                        rows={15}
+                    />
+
+                    <label className="formLabel" htmlFor="Recname">
+                        From:{" "}
+                    </label>
+                    <div className="formErrors">
+                        {formik.errors.from && formik.touched.from ? formik.errors.from : null}
+                    </div>
+                    <input
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        className="inputText"
+                        type="text"
+                        name="sendersName"
+                        id="sendersName"
+                    />
+                    <button className="submitButton" type="submit">
+                        Send
+                    </button>
+                </form>
+            </div>
         </div>
     )
 };

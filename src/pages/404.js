@@ -1,43 +1,57 @@
-import React from 'react';
-import { gql, useQuery } from '@apollo/client';
-import Component404 from '../components/404';
-import Section from '../components/Section';
+import React from "react"
+import Lolly from "../components/Lolly";
+import Header from "../components/Header";
+import { useQuery, gql } from "@apollo/client";
 
-const getLollyById  = gql`
-query getLolly($id: String!) {
-      getLolly(id: $id) {
-        lollyPath
-        recipientName
-        message
-        senderName
-        flavourTop
-        flavourMiddle
-        flavourBottom
+const GET_LOLLY_BY_PATH = gql`
+  query getLollies($lollyPath: String!) {
+    getLollyByPath(lollyPath: $lollyPath) {
+      flavorBottom
+      flavorMiddle
+      flavorTop
+      lollyPath
+      message
+      to
+      from
     }
   }
 `
 
-const Page404 =  ({ location }) => {
-    const pathId =  location.pathname.slice(8)
-    const { loading, error, data } = useQuery(getLollyById, {
-        variables: {
-            id: pathId
-        }
+export const NotFound = ({ location }) => {
+    var queryLollies = location.pathname.slice(0, 9)
+    var queryPath = location.pathname.slice(9)
+
+    const { loading, error, data } = useQuery(GET_LOLLY_BY_PATH, {
+        variables: { lollyPath: queryPath },
     })
-
-    if(loading) {
-        return <div><h1>Loading...</h1></div>
-    }
-
-    if(error) {
-        return <Component404 />
-    }
-
     return (
         <div>
-          <Section lollyPath={data?.getLolly?.lollyPath} recipientName={data?.getLolly?.recipientName} message={data?.getLolly?.message} senderName={data?.getLolly?.senderName} flavourTop={data?.getLolly?.flavourTop} flavourMiddle={data?.getLolly?.flavourMiddle} flavourBottom={data?.getLolly?.flavourBottom} />
+            {loading ? (
+                <div className="loading">Loading...</div>
+            ) : !!data && queryLollies === "/lollies/" ? (
+                <div>
+                    <Header/>
+                    <h5 className="sharableLinkContainer">Your sharable link: </h5>{" "}
+                    <span className="sharableLink">
+                        {" "}
+                        {`https://muhiblollygift.netlify.app/lollies/${data.getLollyByPath.lollyPath}`}
+                    </span>
+                    <div className="recievedContentContainer">
+                        <Lolly
+                            fillLollyTop={data.getLollyByPath.flavorTop}
+                            fillLollyMiddle={data.getLollyByPath.flavorMiddle}
+                            fillLollyBottom={data.getLollyByPath.flavorBottom}
+                        />
+                        <div className="recievedTextContainer">
+                            <h3>HI {data.getLollyByPath.to.toUpperCase()}</h3>
+                            <p>{data.getLollyByPath.message}</p>
+                            <h4>From: {data.getLollyByPath.from}</h4>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                        <div className="pageNotFound">404. Page not found.</div>
+                    )}
         </div>
     )
 }
-
-export default Page404;
