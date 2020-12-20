@@ -1,7 +1,4 @@
 module.exports = {
-  flags: {
-    THE_FLAG: false,
-  },  
   plugins: [
     {
       resolve: "gatsby-source-graphql",
@@ -11,7 +8,7 @@ module.exports = {
         // This is the field under which it's accessible
         fieldName: "LOLLIES",
         // URL to query from
-        url: "https://muhiblollygift.netlify.app/.netlify/functions/vartual_lolly",
+        url: `https://muhiblollygift.netlify.app/.netlify/functions/vartual_lolly`,
       },
     },
   ],
