@@ -70,7 +70,7 @@ const Details: FC<Props> = ({
             ) : null}
           </p>
           <div className="message">
-            <label htmlFor="message">Say something nice</label>{" "}
+            <label htmlFor="message">Message</label>{" "}
             <textarea
               name="message"
               id="message"

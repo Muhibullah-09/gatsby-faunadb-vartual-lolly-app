@@ -98,14 +98,14 @@ const resolvers = {
           })
         );
 
-        // axios
-        //   .post("https://api.netlify.com/build_hooks/5fd7d1620ce1a40fbbe570af")
-        //   .then(function (response) {
-        //     console.log(response);
-        //   })
-        //   .catch(function (error) {
-        //     console.error(error);
-        //   });
+        axios
+          .post("https://api.netlify.com/build_hooks/5fdef461d3466cb490ab3024")
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
 
         return {
           id: result.ref.id,

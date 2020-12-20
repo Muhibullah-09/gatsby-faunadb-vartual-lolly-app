@@ -15,7 +15,7 @@ const Home = () => {
       </div>
 
       <Link to="/createLolly" className="btn">
-        Make a new lolly to send to a friend
+        Send a vartual lolly gift to your near ones.
       </Link>
     </div>
   );
