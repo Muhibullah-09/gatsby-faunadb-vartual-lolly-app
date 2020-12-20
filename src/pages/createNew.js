@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Header from "../components/header";
+import Header from "../components/Header";
 import { navigate } from "gatsby";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { useFormik } from "formik";
@@ -63,9 +63,9 @@ export default function CreateNew() {
     const [colorBot, setcolorBot] = useState("#deaa10")
     const [colorMid, setcolorMid] = useState("#e95946")
     const formik = useFormik({
-        initialValues={initialValues},
-        validationSchema={validationSchema},
-        onSubmit={onSubmit}
+        initialValues:{initialValues},
+        validationSchema:{validationSchema},
+        onSubmit:{onSubmit}
     });
     const [createLolly] = useMutation(createLollyMutation)
     return (

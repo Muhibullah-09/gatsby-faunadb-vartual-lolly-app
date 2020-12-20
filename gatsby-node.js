@@ -1,22 +1,30 @@
-const path = require(`path`);
-
+const path = require(`path`)
 exports.createPages = async ({ actions, graphql }) => {
-    const { data } = await graphql(`
+  const { createPage } = actions;
+  const result = await graphql(`
     query MyQuery {
       LOLLIES {
-        getLollies {
+        getAllLollies {
+          to 
+          message
+          from
+          flavourTop
+          flavourMiddle
+          flavourBottom
           lollyPath
+        }
       }
     }
-}`)
+  `);
 
-console.log(data);
-data.LOLLIES.getLollies.forEach(({ lollyPath }) => {
+  console.log(result);
+  result.data.LOLLIES.getAllLollies.map((data) => {
     actions.createPage({
-        path: `lollies/${lollyPath}`,
-        component: path.resolve(`./src/templates/LollyTemplate.js`),
-        context: {
-            lollyPath: lollyPath,
-        },
+      path: `${data.lollyPath}`,
+      component: path.resolve(`./src/templates/LollyTemplate.js`),
+      context: {
+        data: data,
+      },
     })
-})};
+  })
+}

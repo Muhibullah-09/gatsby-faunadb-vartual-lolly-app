@@ -1,4 +1,7 @@
 module.exports = {
+  flags: {
+    THE_FLAG: false,
+  },  
   plugins: [
     {
       resolve: "gatsby-source-graphql",

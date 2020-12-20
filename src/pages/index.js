@@ -1,12 +1,11 @@
 import React from "react";
 import { navigate } from 'gatsby';
-import { Layout } from "../components/Layout";
 import Lolly from "../components/Lolly";
-
+import Header from '../components/Header';
 export default function Home() {
   return(
     <div>
-      <Layout>
+      <Header/>
         <div>
           <div className='allLollies'>
             <Lolly fillLollyTop='#e97393' fillLollyMiddle='#d23a62' fillLollyBottom='#bb1161' />
@@ -21,7 +20,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </Layout>
     </div>
   )
 };
